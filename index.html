@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tiered Items Price Listt</title>
+  <title>DDMana.com</title>
   <style>
     :root {
       --bg: #0f1220;
@@ -387,21 +387,6 @@
     </footer>
   </main>
 
-  <script>
-    function copyTable() {
-      const rows = Array.from(document.querySelectorAll('tbody tr')).map(tr =>
-        Array.from(tr.querySelectorAll('td')).map(td => td.innerText.replace(/\s+/g, ' ').trim()).join('\t')
-      ).join('\n');
-      navigator.clipboard.writeText(rows).then(() => {
-        const btns = document.querySelectorAll('.btn');
-        const msg = document.createElement('span');
-        msg.textContent = 'Copied!';
-        msg.style.marginLeft = '.5rem';
-        msg.style.color = 'var(--accent)';
-        btns[1].appendChild(msg);
-        setTimeout(() => msg.remove(), 1200);
-      });
-    }
-  </script>
+  
 </body>
 </html>
