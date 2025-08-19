@@ -23,16 +23,11 @@
       margin: 0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       color: var(--ink);
-      background: radial-gradient(1200px 600px at 10% -10%, rgba(125, 211, 252, .15), transparent 40%),
-                  radial-gradient(1000px 600px at 90% -20%, rgba(167, 139, 250, .15), transparent 40%),
-                  var(--bg);
+      background: #0f1220;
       line-height: 1.5;
     }
 
     header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
       background: linear-gradient(180deg, rgba(15,18,32,.95), rgba(15,18,32,.75));
       backdrop-filter: saturate(150%) blur(6px);
       border-bottom: 1px solid var(--border);
@@ -71,12 +66,13 @@
 
     table { width: 100%; border-collapse: collapse; }
     thead th {
-      text-align: left; font-size: .9rem; color: var(--muted);
-      position: sticky; top: 64px; /* below header */
-      background: linear-gradient(180deg, rgba(22,26,43,.98), rgba(22,26,43,.9));
-      border-bottom: 1px solid var(--border);
-      padding: .75rem .75rem;
-      z-index: 5;
+    position: sticky;
+    top: 0;                /* always sticks to the top */
+    z-index: 2;            /* keep above body rows */
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    padding: .75rem .75rem;
     }
 
     tbody tr { border-bottom: 1px dashed var(--border); }
@@ -118,7 +114,7 @@
 <body>
   <header>
     <div class="wrap">
-      <h1>DDMana.com</h1>
+      <h1>DDMana.com (Currently under construction as of Augest 19, 2025)</h1>
     </div>
   </header>
 
