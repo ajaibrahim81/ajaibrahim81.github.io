@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tiered Items Price List</title>
+  <style>
+    :root {
+      --bg: #0f1220;
+      --panel: #161a2b;
+      --ink: #eef1f7;
+      --muted: #b7c0d6;
+      --accent: #7dd3fc;
+      --accent-2: #a78bfa;
+      --border: #262b45;
+      --chip: #1f2440;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--ink);
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(125, 211, 252, .15), transparent 40%),
+                  radial-gradient(1000px 600px at 90% -20%, rgba(167, 139, 250, .15), transparent 40%),
+                  var(--bg);
+      line-height: 1.5;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: linear-gradient(180deg, rgba(15,18,32,.95), rgba(15,18,32,.75));
+      backdrop-filter: saturate(150%) blur(6px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 1rem 1.25rem; }
+
+    h1 {
+      margin: .25rem 0 .5rem;
+      font-size: clamp(1.35rem, 1.5vw + 1rem, 2rem);
+      letter-spacing: .3px;
+    }
+
+    .tools { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .btn {
+      appearance: none; border: 1px solid var(--border); background: var(--chip);
+      color: var(--ink); padding: .55rem .8rem; border-radius: .8rem; cursor: pointer;
+      font-weight: 600; transition: transform .06s ease, border-color .2s ease;
+    }
+    .btn:hover { border-color: var(--accent); }
+    .btn:active { transform: translateY(1px); }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(22,26,43,.9), rgba(22,26,43,.75));
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+
+    .legend {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .5rem;
+      margin: 1rem 0 1.25rem;
+    }
+    .chip { background: var(--chip); border: 1px solid var(--border); padding: .4rem .6rem; border-radius: .6rem; font-size: .9rem; color: var(--muted); }
+
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      text-align: left; font-size: .9rem; color: var(--muted);
+      position: sticky; top: 64px; /* below header */
+      background: linear-gradient(180deg, rgba(22,26,43,.98), rgba(22,26,43,.9));
+      border-bottom: 1px solid var(--border);
+      padding: .75rem .75rem;
+      z-index: 5;
+    }
+
+    tbody tr { border-bottom: 1px dashed var(--border); }
+    tbody tr:hover { background: rgba(125, 211, 252, .06); }
+
+    td { padding: .7rem .75rem; vertical-align: top; }
+    td.tier { font-weight: 800; letter-spacing: .3px; }
+    td.price { color: var(--accent); font-weight: 700; white-space: nowrap; }
+    td.notes { color: var(--muted); max-width: 52ch; }
+
+    .tier-Diamond { color: #67e8f9; }
+    .tier-Platinum { color: #e5e7eb; }
+    .tier-Gold { color: #fde68a; }
+    .tier-Silver { color: #d1d5db; }
+    .tier-Bronze { color: #fca5a5; }
+
+    footer { color: var(--muted); font-size: .9rem; padding: 2rem 0 3rem; text-align: center; }
+
+    @media (max-width: 720px) {
+      thead { display: none; }
+      table, tbody, tr, td { display: block; width: 100%; }
+      tbody tr { padding: .7rem .75rem; border: 1px solid var(--border); margin-bottom: .7rem; border-radius: .8rem; }
+      td { padding: .25rem 0; }
+      td.tier::before { content: "Tier: "; color: var(--muted); font-weight: 600; }
+      td.price::before { content: "Price: "; color: var(--muted); font-weight: 600; }
+      td.item::before { content: "Item: "; color: var(--muted); font-weight: 600; }
+      td.notes::before { content: "Notes: "; color: var(--muted); font-weight: 600; }
+    }
+
+    @media print {
+      header, .tools, .legend { display: none !important; }
+      body { background: #fff; color: #000; }
+      .panel { box-shadow: none; border-color: #999; }
+      thead th { position: static; background: #fff; color: #333; }
+      td.price { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>DDMana.com</h1>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="panel">
+      
+      <table aria-label="Tiered items price list">
+        <thead>
+          <tr>
+            <th scope="col">Tier</th>
+            <th scope="col">Price</th>
+            <th scope="col">Item</th>
+            <th scope="col">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- DIAMOND -->
+          <tr>
+            <td class="tier tier-Diamond">Diamond</td>
+            <td class="price">$100.00</td>
+            <td class="item">Water magi</td>
+            <td class="notes">Exclusive event, does not come with trace.</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Diamond">Diamond</td>
+            <td class="price">$100.00</td>
+            <td class="item">Love magi</td>
+            <td class="notes">Exclusive event, does not come with trace.</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Diamond">Diamond</td>
+            <td class="price">$100.00</td>
+            <td class="item">Ult++ seahorse</td>
+            <td class="notes">50k damage, 500 avg (hero damage + ab2), 300+ hero hp</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Diamond">Diamond</td>
+            <td class="price">$100.00</td>
+            <td class="item">2900 bident</td>
+            <td class="notes">positive tower hp</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Diamond">Diamond</td>
+            <td class="price">$100.00</td>
+            <td class="item">2700 jade island</td>
+            <td class="notes"></td>
+          </tr>
+          <tr>
+            <td class="tier tier-Diamond">Diamond</td>
+            <td class="price">$100.00</td>
+            <td class="item">Custom order</td>
+            <td class="notes">If you want a very specific item, I can make anything happen. Like if you want 1770-1799 plate gloves with 1200+ hero damage and 500 hero hp. Or if you want a specific color Jade Island</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Diamond">Diamond</td>
+            <td class="price">$100.00</td>
+            <td class="item">1000 ult++ armor</td>
+            <td class="notes">unsorted from TBR Ruthless. I will not pick anything out, whatever drops is what you get</td>
+          </tr>
+
+          <!-- PLATINUM -->
+          <tr>
+            <td class="tier tier-Platinum">Platinum</td>
+            <td class="price">$75.00</td>
+            <td class="item">Mike</td>
+            <td class="notes">Exclusive event, does not come with trace.</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Platinum">Platinum</td>
+            <td class="price">$75.00</td>
+            <td class="item">Butterscotch</td>
+            <td class="notes"Exclusive event, does not come with trace.></td>
+          </tr>
+          <tr>
+            <td class="tier tier-Platinum">Platinum</td>
+            <td class="price">$75.00</td>
+            <td class="item">2600 jade island</td>
+            <td class="notes"></td>
+          </tr>
+          <tr>
+            <td class="tier tier-Platinum">Platinum</td>
+            <td class="price">$75.00</td>
+            <td class="item">2800 bident</td>
+            <td class="notes">positive tower hp</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Platinum">Platinum</td>
+            <td class="price">$75.00</td>
+            <td class="item">70k Cdrag</td>
+            <td class="notes">500 avg (hero damage + ab2), 300+ hero hp</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Platinum">Platinum</td>
+            <td class="price">$75.00</td>
+            <td class="item">80k eyeball</td>
+            <td class="notes">400 avg (hero damage + ab2), 200+ hero hp</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Platinum">Platinum</td>
+            <td class="price">$75.00</td>
+            <td class="item">350k broom</td>
+            <td class="notes">300 avg (hero damage + ab2), 200+ hero hp</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Platinum">Platinum</td>
+            <td class="price">$75.00</td>
+            <td class="item">220 cat</td>
+            <td class="notes">200 avg (hero damage + ab2), positive hero hp</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Platinum">Platinum</td>
+            <td class="price">$75.00</td>
+            <td class="item">700 ult++ armor</td>
+            <td class="notes">unsorted from TBR Ruthless. I will not pick anything out, whatever drops is what you get</td>
+          </tr>
+
+          <!-- GOLD -->
+          <tr>
+            <td class="tier tier-Gold">Gold</td>
+            <td class="price">$50.00</td>
+            <td class="item">Mr. Bed</td>
+            <td class="notes">Exclusive event, does not come with trace.</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Gold">Gold</td>
+            <td class="price">$50.00</td>
+            <td class="item">2400 app</td>
+            <td class="notes">positive tower hp</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Gold">Gold</td>
+            <td class="price">$50.00</td>
+            <td class="item">1700 dps</td>
+            <td class="notes">300+ hero hp (after set bonus)</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Gold">Gold</td>
+            <td class="price">$50.00</td>
+            <td class="item">2500 jade island</td>
+            <td class="notes"></td>
+          </tr>
+          <tr>
+            <td class="tier tier-Gold">Gold</td>
+            <td class="price">$50.00</td>
+            <td class="item">2700 bident</td>
+            <td class="notes">positive tower hp</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Gold">Gold</td>
+            <td class="price">$50.00</td>
+            <td class="item">67k Cdrag</td>
+            <td class="notes">500 avg (hero damage + ab2), 300+ hero hp</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Gold">Gold</td>
+            <td class="price">$50.00</td>
+            <td class="item">75k eyeball</td>
+            <td class="notes">400 avg (hero damage + ab2), 200+ hero hp</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Gold">Gold</td>
+            <td class="price">$50.00</td>
+            <td class="item">340k broom</td>
+            <td class="notes">300 avg (hero damage + ab2), 200+ hero hp</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Gold">Gold</td>
+            <td class="price">$50.00</td>
+            <td class="item">218 cat</td>
+            <td class="notes">200 avg (hero damage + ab2), positive hero hp</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Gold">Gold</td>
+            <td class="price">$50.00</td>
+            <td class="item">1000 raw cv</td>
+            <td class="notes">Comes pre forged and ready to spend.</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Gold">Gold</td>
+            <td class="price">$50.00</td>
+            <td class="item">dps MM</td>
+            <td class="notes">900 avg (hero damage + ab2), 400+ hero hp, 10k ranged damage</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Gold">Gold</td>
+            <td class="price">$50.00</td>
+            <td class="item">builder MM</td>
+            <td class="notes">999 range, 800 avg (tower hp + tower damage + tower rate + tower range)</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Gold">Gold</td>
+            <td class="price">$50.00</td>
+            <td class="item">180k forest rifle</td>
+            <td class="notes">400 avg (hero damage + ab2), 200+ hero hp</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Gold">Gold</td>
+            <td class="price">$50.00</td>
+            <td class="item">400 ult++ armor</td>
+            <td class="notes">unsorted from TBR Ruthless. I will not pick anything out, whatever drops is what you get</td>
+          </tr>
+
+          <!-- SILVER -->
+          <tr>
+            <td class="tier tier-Silver">Silver</td>
+            <td class="price">$25.00</td>
+            <td class="item">Cheater</td>
+            <td class="notes">NPC, VPC, EPH, FP, Celebracers</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Silver">Silver</td>
+            <td class="price">$25.00</td>
+            <td class="item">1600 dps</td>
+            <td class="notes">300+ hero hp (after set bonus)</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Silver">Silver</td>
+            <td class="price">$25.00</td>
+            <td class="item">2300 app</td>
+            <td class="notes">positive tower hp</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Silver">Silver</td>
+            <td class="price">$25.00</td>
+            <td class="item">Magi</td>
+            <td class="notes">Pumpkin Magi or Wind Magi</td>
+          </tr>
+          <tr>
+            <td class="tier tier-Silver">Silver</td>
+            <td class="price">$25.00</td>
+            <td class="item">Crackers</td>
+            <td class="notes"></td>
+          </tr>
+          <tr>
+            <td class="tier tier-Silver">Silver</td>
+            <td class="price">$25.00</td>
+            <td class="item">Rainmaker</td>
+            <td class="notes"></td>
+          </tr>
+          <tr>
+            <td class="tier tier-Silver">Silver</td>
+            <td class="price">$25.00</td>
+            <td class="item">Glaciers</td>
+            <td class="notes"></td>
+          </tr>
+
+          <!-- BRONZE -->
+          <tr>
+            <td class="tier tier-Bronze">Bronze</td>
+            <td class="price">$10.00</td>
+            <td class="item">10T mana</td>
+            <td class="notes"></td>
+          </tr>
+          <tr>
+            <td class="tier tier-Bronze">Bronze</td>
+            <td class="price">$10.00</td>
+            <td class="item">Change Forge</td>
+            <td class="notes"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer>
+      <p>All prices are listed per tier. Item stats/notes reflect typical ranges or constraints supplied. Availability may vary.</p>
+    </footer>
+  </main>
+
+  <script>
+    function copyTable() {
+      const rows = Array.from(document.querySelectorAll('tbody tr')).map(tr =>
+        Array.from(tr.querySelectorAll('td')).map(td => td.innerText.replace(/\s+/g, ' ').trim()).join('\t')
+      ).join('\n');
+      navigator.clipboard.writeText(rows).then(() => {
+        const btns = document.querySelectorAll('.btn');
+        const msg = document.createElement('span');
+        msg.textContent = 'Copied!';
+        msg.style.marginLeft = '.5rem';
+        msg.style.color = 'var(--accent)';
+        btns[1].appendChild(msg);
+        setTimeout(() => msg.remove(), 1200);
+      });
+    }
+  </script>
+</body>
+</html>
