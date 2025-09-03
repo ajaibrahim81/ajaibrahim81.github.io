@@ -90,6 +90,35 @@
     .tier-Silver { color: #d1d5db; }
     .tier-Bronze { color: #fca5a5; }
 
+    .promo {
+      background: linear-gradient(90deg, #7dd3fc, #a78bfa);
+      color: #0f1220;
+      font-weight: 700;
+      text-align: center;
+      padding: .75rem 1rem;
+      border-bottom: 2px solid var(--border);
+    }
+    
+    .promo .highlight {
+      font-size: 1.2rem;
+      color: #fff;
+      background: #0f1220;
+      padding: 0.2rem 0.5rem;
+      border-radius: .4rem;
+    }
+    
+    .promo-row {
+      background: rgba(125, 211, 252, .1);
+    }
+    
+    .old-price {
+      text-decoration: line-through;
+      color: var(--muted);
+      font-size: .85rem;
+      margin-left: .4rem;
+    }
+
+
     footer { color: var(--muted); font-size: .9rem; padding: 2rem 0 3rem; text-align: center; }
 
     @media (max-width: 720px) {
@@ -118,6 +147,13 @@
       <h1>DDMana.com (Currently under construction as of September 2, 2025)</h1>
     </div>
   </header>
+
+  <!-- PROMO SECTION -->
+  <div class="promo">
+    <div class="wrap">
+      🎉 Special Promo: First Silver item only <span class="highlight">$5</span>! 🎉
+    </div>
+  </div>
 
   <main class="wrap">
     <div class="panel">
